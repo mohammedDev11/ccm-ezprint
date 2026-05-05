@@ -28,7 +28,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.status(200).json({
     success: true,
-    message: "Alpha Queue API v1",
+    message: "CCM EzPrint API v1",
   });
 });
 

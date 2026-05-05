@@ -38,7 +38,7 @@ router.post(
 router.post(
   "/drafts/batch",
   express.raw({
-    type: "application/vnd.alpha.print-batch+json",
+    type: "application/vnd.ccm-ezprint.print-batch+json",
     limit: env.printUploadLimit,
   }),
   savePrintDraftBatch,
@@ -58,7 +58,7 @@ router.post(
 router.post(
   "/upload-print-batch",
   express.raw({
-    type: "application/vnd.alpha.print-batch+json",
+    type: "application/vnd.ccm-ezprint.print-batch+json",
     limit: env.printUploadLimit,
   }),
   uploadAndPrintBatch,

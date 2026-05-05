@@ -825,7 +825,7 @@ function SharedAccountsTable(_props, ref) {
 
     exportTableData({
       title: "Shared Accounts",
-      filename: "alpha-queue-shared-accounts",
+      filename: "ccm-ezprint-shared-accounts",
       format,
       columns: [
         { label: "Person Name", value: (row: SharedAccountItem) => row.personName },

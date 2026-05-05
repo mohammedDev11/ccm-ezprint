@@ -430,7 +430,7 @@ export default function UserTransactionHistoryTable() {
 
     exportTableData({
       title: "User Transaction History",
-      filename: "alpha-queue-transaction-history",
+      filename: "ccm-ezprint-transaction-history",
       format: exportMethod,
       columns: [
         { label: "Date", value: (row: TransactionItem) => row.date },

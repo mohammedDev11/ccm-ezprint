@@ -499,7 +499,7 @@ export default function UserNotificationsTable() {
 
     exportTableData({
       title: "User Notifications",
-      filename: "alpha-queue-user-notifications",
+      filename: "ccm-ezprint-user-notifications",
       format: exportMethod,
       columns: [
         { label: "Notification", value: (row: UserNotification) => row.title },

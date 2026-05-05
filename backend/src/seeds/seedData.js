@@ -2,7 +2,7 @@ const usersSeed = [
   {
     username: "admin",
     fullName: "System Administrator",
-    email: "admin@alpha-queue.local",
+    email: "admin@ccm-ezprint.local",
     role: "Admin",
     department: "CCM",
     phone: "+966 50 000 0001",
@@ -18,7 +18,7 @@ const usersSeed = [
   {
     username: "subadmin",
     fullName: "Quota Manager",
-    email: "subadmin@alpha-queue.local",
+    email: "subadmin@ccm-ezprint.local",
     role: "SubAdmin",
     department: "CCM",
     phone: "+966 50 000 0002",

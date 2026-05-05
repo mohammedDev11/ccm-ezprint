@@ -44,7 +44,9 @@ type UploadBatchOptions = {
 };
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:5001";
 
 const API_VERSION_PREFIX = "/api/v1";
 const normalizedApiBaseUrl = API_BASE_URL.replace(/\/+$/, "");
@@ -58,16 +60,16 @@ const getApiUrl = (path: string) => {
 };
 
 const TOKEN_STORAGE_KEYS: Record<Scope, string> = {
-  user: "alpha_queue_user_token",
-  admin: "alpha_queue_admin_token",
+  user: "ccm_ezprint_user_token",
+  admin: "ccm_ezprint_admin_token",
 };
 
 const USER_STORAGE_KEYS: Record<Scope, string> = {
-  user: "alpha_queue_user_profile",
-  admin: "alpha_queue_admin_profile",
+  user: "ccm_ezprint_user_profile",
+  admin: "ccm_ezprint_admin_profile",
 };
 
-const CURRENT_SCOPE_KEY = "alpha_queue_current_scope";
+const CURRENT_SCOPE_KEY = "ccm_ezprint_current_scope";
 
 const roleToScope = (role: string): Scope =>
   role === "Admin" || role === "SubAdmin" ? "admin" : "user";
@@ -353,15 +355,15 @@ export const apiUpload = async <T>({
   const headers = new Headers();
   headers.set("Authorization", `Bearer ${session.token}`);
   headers.set("Content-Type", file.type || "application/pdf");
-  headers.set("X-Alpha-File-Name", file.name);
-  headers.set("X-Alpha-Original-File-Name", file.name);
+  headers.set("X-CCM-EzPrint-File-Name", file.name);
+  headers.set("X-CCM-EzPrint-Original-File-Name", file.name);
 
   Object.entries(metadata).forEach(([key, value]) => {
     if (value === undefined || value === null || value === "") {
       return;
     }
 
-    const normalizedKey = `X-Alpha-${key
+    const normalizedKey = `X-CCM-EzPrint-${key
       .replace(/([a-z])([A-Z])/g, "$1-$2")
       .replace(/_/g, "-")}`;
 
@@ -431,7 +433,7 @@ export const apiUploadBatch = async <T>({
     method: "POST",
     headers: {
       Authorization: `Bearer ${session.token}`,
-      "Content-Type": "application/vnd.alpha.print-batch+json",
+      "Content-Type": "application/vnd.ccm-ezprint.print-batch+json",
     },
     body: JSON.stringify(payload),
     cache: "no-store",

@@ -477,6 +477,7 @@ const Page = () => {
       ) || null,
     [selectedPrinterValue, selectedQueuePrinterTargets],
   );
+  const selectedPrinterListBoxValue = selectedPrinter ? selectedPrinterValue : "";
   const printerOptions = useMemo<ListBoxOption[]>(
     () =>
       selectedQueuePrinterTargets.map((printer) => {
@@ -514,17 +515,6 @@ const Page = () => {
     () => files.reduce((sum, file) => sum + file.size, 0),
     [files],
   );
-
-  useEffect(() => {
-    if (
-      selectedPrinterValue &&
-      !selectedQueuePrinterTargets.some(
-        (printer) => getPrinterTargetValue(printer) === selectedPrinterValue,
-      )
-    ) {
-      setSelectedPrinterValue("");
-    }
-  }, [selectedPrinterValue, selectedQueuePrinterTargets]);
 
   const resetUploadFlow = () => {
     setFiles([]);
@@ -835,7 +825,7 @@ const Page = () => {
     >
       {printerOptions.length > 0 ? (
         <ListBox
-          value={selectedPrinterValue}
+          value={selectedPrinterListBoxValue}
           onValueChange={setSelectedPrinterValue}
           options={printerOptions}
           placeholder="Select target printer"

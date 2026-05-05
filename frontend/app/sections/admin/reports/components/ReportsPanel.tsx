@@ -336,7 +336,7 @@ export default function ReportsPanel() {
           description:
             "Exports the live overview cards shown on the admin dashboard.",
           rows: overviewRows,
-          filename: "alpha-queue-system-overview",
+          filename: "ccm-ezprint-system-overview",
           columns: [
             { label: "Metric", value: (row) => reportValue(row, "metric") },
             { label: "Value", value: (row) => reportValue(row, "value") },
@@ -349,7 +349,7 @@ export default function ReportsPanel() {
           description:
             "Current job volumes, pages, and cost grouped by backend job status.",
           rows: toReportRows(summary?.jobStatusBreakdown),
-          filename: "alpha-queue-job-status-breakdown",
+          filename: "ccm-ezprint-job-status-breakdown",
           columns: [
             { label: "Status", value: (row) => reportValue(row, "status") },
             { label: "Jobs", value: (row) => reportValue(row, "count") },
@@ -365,7 +365,7 @@ export default function ReportsPanel() {
           description:
             "Highest-volume printers for the selected reporting period.",
           rows: toReportRows(summary?.topPrinters),
-          filename: "alpha-queue-top-printers",
+          filename: "ccm-ezprint-top-printers",
           columns: [
             { label: "Printer", value: (row) => reportValue(row, "printerName") },
             { label: "Jobs", value: (row) => reportValue(row, "jobs") },
@@ -381,7 +381,7 @@ export default function ReportsPanel() {
           description:
             "Users with the highest activity based on the live print job records.",
           rows: toReportRows(summary?.topUsers),
-          filename: "alpha-queue-top-users",
+          filename: "ccm-ezprint-top-users",
           columns: [
             { label: "Username", value: (row) => reportValue(row, "username") },
             { label: "Jobs", value: (row) => reportValue(row, "jobs") },
@@ -397,7 +397,7 @@ export default function ReportsPanel() {
           description:
             "Group activity totals from the backend group summary.",
           rows: toReportRows(summary?.groupSummary),
-          filename: "alpha-queue-group-activity",
+          filename: "ccm-ezprint-group-activity",
           columns: [
             { label: "Group", value: (row) => reportValue(row, "name") },
             { label: "Members", value: (row) => reportValue(row, "members") },
@@ -414,7 +414,7 @@ export default function ReportsPanel() {
           description:
             "Quota transaction totals and counts grouped by transaction type.",
           rows: toReportRows(summary?.quotaSummary),
-          filename: "alpha-queue-quota-summary",
+          filename: "ccm-ezprint-quota-summary",
           columns: [
             { label: "Type", value: (row) => reportValue(row, "type") },
             { label: "Transactions", value: (row) => reportValue(row, "count") },

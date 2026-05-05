@@ -1,5 +1,5 @@
 const getHealthStatus = () => ({
-  message: "Alpha Queue backend is running",
+  message: "CCM EzPrint backend is running",
   timestamp: new Date().toISOString(),
 });
 

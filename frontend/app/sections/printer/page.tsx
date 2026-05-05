@@ -127,7 +127,7 @@ const Page = () => {
                 Release happens on the physical printer
               </h2>
               <p className="paragraph mt-2">
-                After a user uploads a PDF, Alpha Queue sends it to the HP as a private stored job. On the printer touchscreen, open the stored/private jobs list, select the user/job, enter the PIN shown after upload, then print it from the printer panel.
+                After a user uploads a PDF, CCM EzPrint sends it to the HP as a private stored job. On the printer touchscreen, open the stored/private jobs list, select the user/job, enter the PIN shown after upload, then print it from the printer panel.
               </p>
             </div>
           </div>

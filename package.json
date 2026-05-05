@@ -1,0 +1,27 @@
+{
+  "name": "ccm-ezprint",
+  "version": "1.0.0",
+  "description": "ccm-ezprint is a full-stack printing management system for university-style print services. It provides a public landing page, authenticated student and staff dashboards, quota and redeem-code management, secure print release, printer administration, notification tracking, reports, and a printer-screen release flow.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "backend:dev": "npm --prefix backend run dev",
+    "backend:start": "npm --prefix backend start",
+    "frontend:dev": "npm --prefix frontend run dev",
+    "frontend:build": "npm --prefix frontend run build",
+    "frontend:lint": "npm --prefix frontend run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammedDev11/ccm-ezprint.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohammedDev11/ccm-ezprint/issues"
+  },
+  "homepage": "https://github.com/mohammedDev11/ccm-ezprint#readme"
+}

@@ -39,13 +39,13 @@ frontend/components/shared/page/Text/PageIntro.tsx
 There is a separate sibling project currently on this machine:
 
 ```txt
-/Users/mohammedalshammasi/Documents/10-Main/AlphaQueue
+/Users/mohammedalshammasi/Documents/10-Main/CCMEzPrint
 ```
 
 That sibling project has its own PageIntro:
 
 ```txt
-/Users/mohammedalshammasi/Documents/10-Main/AlphaQueue/app/components/shared/page/Text/PageIntro.tsx
+/Users/mohammedalshammasi/Documents/10-Main/CCMEzPrint/app/components/shared/page/Text/PageIntro.tsx
 ```
 
 That sibling PageIntro still renders the old large layout:
@@ -91,11 +91,11 @@ This was not a browser cache issue.
 Two Next.js frontend dev servers were running at the same time:
 
 ```txt
-port 3000 -> /Users/mohammedalshammasi/Documents/10-Main/alpha-queue/frontend
-port 3001 -> /Users/mohammedalshammasi/Documents/10-Main/AlphaQueue
+port 3000 -> /Users/mohammedalshammasi/Documents/10-Main/ccm-ezprint/frontend
+port 3001 -> /Users/mohammedalshammasi/Documents/10-Main/CCMEzPrint
 ```
 
-The `AlphaQueue` server on port `3001` was serving the old PageIntro implementation with `title-xl` and subtitle text. That exactly matches the reported UI mismatch: big "Users" title plus subtitle instead of the dashboard-style section header.
+The `CCMEzPrint` server on port `3001` was serving the old PageIntro implementation with `title-xl` and subtitle text. That exactly matches the reported UI mismatch: big "Users" title plus subtitle instead of the dashboard-style section header.
 
 ## What I fixed
 
@@ -130,17 +130,17 @@ frontend/components/shared/page/Text/PageIntro.tsx
 The old UI was coming from the sibling app:
 
 ```txt
-/Users/mohammedalshammasi/Documents/10-Main/AlphaQueue/app/components/shared/page/Text/PageIntro.tsx
+/Users/mohammedalshammasi/Documents/10-Main/CCMEzPrint/app/components/shared/page/Text/PageIntro.tsx
 ```
 
-So the implementation in this repo could be correct while the browser/test runner/teammate was pointed at `localhost:3001`, or otherwise at the sibling `AlphaQueue` app.
+So the implementation in this repo could be correct while the browser/test runner/teammate was pointed at `localhost:3001`, or otherwise at the sibling `CCMEzPrint` app.
 
 ## Verification steps
 
 1. Use this workspace frontend only:
 
 ```sh
-cd /Users/mohammedalshammasi/Documents/10-Main/alpha-queue/frontend
+cd /Users/mohammedalshammasi/Documents/10-Main/ccm-ezprint/frontend
 npm run dev
 ```
 
@@ -164,4 +164,4 @@ NEW PageIntro RENDERED
 OLD UsersHeader RENDERED
 ```
 
-6. If a teammate still sees the large title layout, have them confirm the URL and port. The old layout exists in the sibling `AlphaQueue` project, not in this workspace's active `PageIntro`.
+6. If a teammate still sees the large title layout, have them confirm the URL and port. The old layout exists in the sibling `CCMEzPrint` project, not in this workspace's active `PageIntro`.

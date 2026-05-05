@@ -1028,7 +1028,7 @@ export default function Page() {
   const exportJobStatus = (format: TableExportFormat) => {
     exportTableData({
       title: `Dashboard Job Status Breakdown (${period})`,
-      filename: "alpha-queue-dashboard-job-status",
+      filename: "ccm-ezprint-dashboard-job-status",
       format,
       columns: [
         { label: "Status", value: (row: ReportsSummary["jobStatusBreakdown"][number]) => row.status },

@@ -414,7 +414,7 @@ const TransactionsTable = () => {
 
     exportTableData({
       title: "Transaction History",
-      filename: "alpha-queue-transactions",
+      filename: "ccm-ezprint-transactions",
       format,
       columns: [
         { label: "Time", value: (row: TransactionItem) => row.time },

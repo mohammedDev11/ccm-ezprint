@@ -1,8 +1,8 @@
-# Alpha Queue Backend Technical Report
+# CCM EzPrint Backend Technical Report
 
 Date: 2026-04-24
 
-This report explains the current backend implementation of Alpha Queue from the ground up. It is written for someone who is new to the backend, but it stays technically accurate and tied to the actual source files.
+This report explains the current backend implementation of CCM EzPrint from the ground up. It is written for someone who is new to the backend, but it stays technically accurate and tied to the actual source files.
 
 ## 1. Project Overview
 
@@ -617,7 +617,7 @@ Response example:
 ```json
 {
   "success": true,
-  "message": "Alpha Queue API v1"
+  "message": "CCM EzPrint API v1"
 }
 ```
 
@@ -638,7 +638,7 @@ Response example:
 ```json
 {
   "success": true,
-  "message": "Alpha Queue backend is running",
+  "message": "CCM EzPrint backend is running",
   "timestamp": "2026-04-24T18:30:00.000Z"
 }
 ```
@@ -996,15 +996,15 @@ Request:
 Headers:
 
 ```txt
-x-alpha-file-name: assignment.pdf
-x-alpha-original-file-name: assignment.pdf
-x-alpha-queue-id: queue-id
-x-alpha-document-name: Assignment
-x-alpha-copies: 1
-x-alpha-color-mode: B&W
-x-alpha-mode: Simplex
-x-alpha-paper-size: A4
-x-alpha-quality: Normal
+x-ccm-ezprint-file-name: assignment.pdf
+x-ccm-ezprint-original-file-name: assignment.pdf
+x-ccm-ezprint-id: queue-id
+x-ccm-ezprint-document-name: Assignment
+x-ccm-ezprint-copies: 1
+x-ccm-ezprint-color-mode: B&W
+x-ccm-ezprint-mode: Simplex
+x-ccm-ezprint-paper-size: A4
+x-ccm-ezprint-quality: Normal
 ```
 
 Response example:

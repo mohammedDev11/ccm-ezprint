@@ -67,7 +67,7 @@ const loginLocalUser = async ({ emailOrUsername, password }) => {
 
   const isPasswordValid =
     (user.passwordHash && await user.validatePassword(password)) ||
-    isLocalDemoPassword(password) ||
+    isLocalDemoPassword(user.username, password) ||
     isLocalDemoLegacyPassword(user.username, password);
 
   if (!isPasswordValid) {

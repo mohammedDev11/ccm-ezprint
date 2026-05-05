@@ -378,7 +378,7 @@ const mapSystemSettings = (settings, role) => ({
 
 const getSystemInfo = (settings) => ({
   appName: "EzPrint",
-  apiName: "Alpha Queue API",
+  apiName: "CCM EzPrint API",
   version: backendPackage.version || "1.0.0",
   nodeEnv: env.nodeEnv,
   backendStatus: "Online",

@@ -79,39 +79,39 @@ const normalizeJobIdsPayload = (payload = {}) => {
 };
 
 const normalizeUploadPrintHeaders = (headers = {}) => {
-  const fileName = toStringValue(headers["x-alpha-file-name"]);
+  const fileName = toStringValue(headers["x-ccm-ezprint-file-name"]);
   const originalFileName =
-    toStringValue(headers["x-alpha-original-file-name"]) || fileName;
+    toStringValue(headers["x-ccm-ezprint-original-file-name"]) || fileName;
 
   if (!fileName && !originalFileName) {
-    throw createHttpError(400, "x-alpha-file-name header is required.");
+    throw createHttpError(400, "x-ccm-ezprint-file-name header is required.");
   }
 
   return {
-    queueId: toStringValue(headers["x-alpha-queue-id"]),
+    queueId: toStringValue(headers["x-ccm-ezprint-queue-id"]),
     printerId:
-      toStringValue(headers["x-alpha-printer-id"]) ||
-      toStringValue(headers["x-alpha-selected-printer-id"]),
+      toStringValue(headers["x-ccm-ezprint-printer-id"]) ||
+      toStringValue(headers["x-ccm-ezprint-selected-printer-id"]),
     printerName:
-      toStringValue(headers["x-alpha-printer-name"]) ||
-      toStringValue(headers["x-alpha-selected-printer-name"]),
+      toStringValue(headers["x-ccm-ezprint-printer-name"]) ||
+      toStringValue(headers["x-ccm-ezprint-selected-printer-name"]),
     documentName:
-      toStringValue(headers["x-alpha-document-name"]) ||
+      toStringValue(headers["x-ccm-ezprint-document-name"]) ||
       originalFileName ||
       fileName,
     fileName: fileName || originalFileName,
     originalFileName: originalFileName || fileName,
     fileType: toStringValue(headers["content-type"] || "application/pdf"),
     fileSize: toNumberValue(headers["content-length"], 0),
-    copies: Math.max(1, toNumberValue(headers["x-alpha-copies"], 1)),
-    colorMode: toStringValue(headers["x-alpha-color-mode"] || "B&W"),
-    mode: /duplex/i.test(toStringValue(headers["x-alpha-mode"]))
+    copies: Math.max(1, toNumberValue(headers["x-ccm-ezprint-copies"], 1)),
+    colorMode: toStringValue(headers["x-ccm-ezprint-color-mode"] || "B&W"),
+    mode: /duplex/i.test(toStringValue(headers["x-ccm-ezprint-mode"]))
       ? "Duplex"
       : "Simplex",
-    paperSize: toStringValue(headers["x-alpha-paper-size"] || "A4"),
-    quality: toStringValue(headers["x-alpha-quality"] || "Normal"),
-    notes: toStringValue(headers["x-alpha-notes"]),
-    clientType: toStringValue(headers["x-alpha-client-type"] || "Web Print"),
+    paperSize: toStringValue(headers["x-ccm-ezprint-paper-size"] || "A4"),
+    quality: toStringValue(headers["x-ccm-ezprint-quality"] || "Normal"),
+    notes: toStringValue(headers["x-ccm-ezprint-notes"]),
+    clientType: toStringValue(headers["x-ccm-ezprint-client-type"] || "Web Print"),
   };
 };
 

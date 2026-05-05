@@ -1,8 +1,8 @@
 {
-  "name": "alpha-queue-server",
+  "name": "ccm-ezprint-server",
   "version": "1.0.0",
   "private": true,
-  "description": "Backend API for Alpha Queue printing management system",
+  "description": "Backend API for CCM EzPrint printing management system",
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon src/server.js",

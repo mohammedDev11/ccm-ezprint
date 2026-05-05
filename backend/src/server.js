@@ -53,7 +53,7 @@ const startServer = async () => {
 
     app.listen(env.port, () => {
       console.log(
-        `Alpha Queue API listening on port ${env.port} in ${env.nodeEnv} mode`
+        `CCM EzPrint API listening on port ${env.port} in ${env.nodeEnv} mode`
       );
     });
   } catch (error) {
