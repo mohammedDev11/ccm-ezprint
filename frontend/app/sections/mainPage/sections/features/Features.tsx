@@ -67,18 +67,20 @@ import SectionHeader from "../../components/SectionHeader";
 
 const Features = () => {
   return (
-    <section id="features" className="section space-y-10">
-      <SectionHeader
-        title="EzPrint Features"
-        description="Everything you need to manage printing securely, efficiently, and intelligently."
-        align="center"
-        size="lg"
-      />
-      <div className="w-full flex justify-center">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-5xl w-full">
-          <Box1 />
-          <Box2 />
-          <Box3 />
+    <section id="features" className="section relative w-full overflow-hidden">
+      <div className="container space-y-10">
+        <SectionHeader
+          title="EzPrint Features"
+          description="Everything you need to manage printing securely, efficiently, and intelligently."
+          align="center"
+          size="lg"
+        />
+        <div className="flex w-full justify-center">
+          <div className="grid w-full max-w-6xl grid-cols-1 gap-10 md:grid-cols-3 lg:gap-14">
+            <Box1 />
+            <Box2 />
+            <Box3 />
+          </div>
         </div>
       </div>
     </section>

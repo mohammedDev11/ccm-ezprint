@@ -198,12 +198,8 @@ function SidebarNavItem({
 
   const hasPreviewVideo = Boolean(item.lightVideoSrc || item.darkVideoSrc);
   const labelBounds = shortcutLabel
-    ? side === "right"
-      ? "left-[4.25rem] right-[78px] text-right"
-      : "left-[78px] right-[4.25rem]"
-    : side === "right"
-      ? "left-4 right-[78px] text-right"
-      : "left-[78px] right-4";
+    ? "left-[78px] right-[4.25rem]"
+    : "left-[78px] right-4";
 
   return (
     <>
@@ -231,7 +227,7 @@ function SidebarNavItem({
         <span
           className={cn(
             "absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 shrink-0 items-center justify-center rounded-full transition-colors duration-300",
-            side === "right" ? "right-[22px]" : "left-[22px]",
+            "left-[22px]",
             active && "text-[var(--color-brand-500)]",
           )}
         >
@@ -264,7 +260,7 @@ function SidebarNavItem({
             aria-hidden={!isExpanded}
             className={cn(
               "pointer-events-none absolute top-1/2 z-10 shrink-0 -translate-y-1/2 rounded-md border px-1.5 py-0.5 text-[0.64rem] font-semibold leading-4 transition-[opacity,transform,color,background-color,border-color] duration-300",
-              side === "right" ? "left-4" : "right-4",
+              "right-4",
               isExpanded
                 ? "translate-x-0 opacity-100"
                 : side === "right"
@@ -287,7 +283,7 @@ function SidebarNavItem({
           <span
             className={cn(
               "absolute top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full",
-              side === "right" ? "left-4" : "right-4",
+              "right-4",
             )}
             style={{
               background: "rgba(var(--support-rgb), 0.95)",

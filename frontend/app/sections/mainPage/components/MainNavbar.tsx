@@ -120,12 +120,12 @@
 "use client";
 
 import ThemeToggle from "@/components/shared/actions/ThemeToggle";
-import GlowButton from "@/components/ui/button/GlowButton";
 import IconLabelButton from "@/components/ui/button/IconLabelButton";
 import TutorialVideoPreview from "@/components/ui/card/TutorialVideoCard";
 import Modal from "@/components/ui/modal/Modal";
+import Link from "next/link";
 import { useState } from "react";
-import { FaRegUser } from "react-icons/fa";
+import { UserRound } from "lucide-react";
 import Content from "../Content";
 import SSO from "../sections/SSO";
 import {
@@ -136,7 +136,6 @@ import {
   NavBody,
   NavItems,
   Navbar,
-  NavbarButton,
   NavbarLogo,
 } from "./Navbar";
 
@@ -154,20 +153,21 @@ export function MainNavbar() {
   const [showStartPreview, setShowStartPreview] = useState(false);
 
   return (
-    <div className="relative w-full pt-24">
+    <div className="relative w-full overflow-x-clip bg-[var(--background)] pt-24 text-[var(--foreground)]">
       <Navbar>
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
 
           <div className="relative z-[70] flex items-center gap-3">
-            <ThemeToggle className="text-[var(--foreground)]" />
+            <ThemeToggle className="hidden lg:inline-flex" iconOnly />
 
             <IconLabelButton
-              icon={<FaRegUser size={20} />}
+              icon={<UserRound size={18} />}
               label="Login"
               onClick={() => setIsLoginOpen(true)}
-              className="text-[var(--foreground)] "
+              className="hidden lg:inline-flex"
+              iconOnly
             />
 
             <div
@@ -175,7 +175,7 @@ export function MainNavbar() {
               onMouseEnter={() => setShowStartPreview(true)}
               onMouseLeave={() => setShowStartPreview(false)}
             >
-              <GlowButton>Start Printing</GlowButton>
+              <StartPrintingLink />
 
               {showStartPreview && (
                 <div className="pointer-events-none absolute right-0 top-[calc(100%+18px)] z-[120]">
@@ -216,24 +216,24 @@ export function MainNavbar() {
             ))}
 
             <div className="flex w-full flex-col gap-3">
-              <NavbarButton
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsLoginOpen(true);
-                }}
-                variant="secondary"
-                className="w-full"
-              >
-                Login
-              </NavbarButton>
+              <div className="flex items-center gap-3">
+                <ThemeToggle iconOnly />
 
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
+                <IconLabelButton
+                  icon={<UserRound size={18} />}
+                  label="Login"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsLoginOpen(true);
+                  }}
+                  iconOnly
+                />
+              </div>
+
+              <StartPrintingLink
                 className="w-full"
-              >
-                Start Printing
-              </NavbarButton>
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
             </div>
           </MobileNavMenu>
         </MobileNav>
@@ -247,3 +247,24 @@ export function MainNavbar() {
     </div>
   );
 }
+
+const StartPrintingLink = ({
+  className = "",
+  onClick,
+}: {
+  className?: string;
+  onClick?: () => void;
+}) => {
+  return (
+    <Link
+      href="/sections/user/print"
+      onClick={onClick}
+      className={`relative inline-flex items-center justify-center overflow-hidden rounded-2xl border border-[var(--border)] px-7 py-3 font-medium text-[var(--foreground)] transition-all duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/30 ${className}`}
+    >
+      <span className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-support-300 via-brand-500 to-brand-700 opacity-60 blur-md" />
+      <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-support-300 via-brand-500 to-brand-700 opacity-80" />
+      <span className="absolute inset-[1.5px] rounded-2xl bg-[var(--background)]" />
+      <span className="relative z-10">Start Printing</span>
+    </Link>
+  );
+};

@@ -10,7 +10,6 @@ import {
   Maximize2,
   Minimize2,
   MoreHorizontal,
-  Settings2,
   ShieldAlert,
   SlidersHorizontal,
   Trash2,
@@ -18,6 +17,7 @@ import {
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import PageIntro from "@/components/shared/page/Text/PageIntro";
+import NotificationSettingsPanel from "@/app/sections/admin/notifications/components/NotificationSettingsPanel";
 import {
   Table,
   TableBody,
@@ -40,6 +40,10 @@ import RefreshButton from "@/components/ui/button/RefreshButton";
 import ListBox, { type ListBoxOption } from "@/components/ui/listbox/ListBox";
 import Modal from "@/components/ui/modal/Modal";
 import { exportTableData, TableExportFormat } from "@/lib/export";
+import {
+  INITIAL_NOTIFICATION_SETTINGS,
+  type NotificationSettingsType,
+} from "@/lib/mock-data/Admin/notifications";
 import { apiDelete, apiGet, apiPatch, apiPost } from "@/services/api";
 
 type Tab = "Notifications" | "Settings";
@@ -236,6 +240,18 @@ export default function NotificationsPage() {
     useState<AdminNotification | null>(null);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [exportMethod, setExportMethod] = useState<TableExportFormat>("PDF");
+  const [notificationSettings, setNotificationSettings] =
+    useState<NotificationSettingsType>(INITIAL_NOTIFICATION_SETTINGS);
+
+  const updateNotificationSettings = <K extends keyof NotificationSettingsType>(
+    key: K,
+    value: NotificationSettingsType[K],
+  ) => {
+    setNotificationSettings((current) => ({
+      ...current,
+      [key]: value,
+    }));
+  };
 
   const loadNotifications = useCallback(async (showSpinner = false) => {
     if (showSpinner) {
@@ -967,62 +983,10 @@ export default function NotificationsPage() {
           {renderNotificationsTable()}
         </div>
       ) : (
-        <div
-          className="rounded-2xl border p-6"
-          style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-        >
-          <div className="flex items-center gap-3">
-            <div
-              className="flex h-12 w-12 items-center justify-center rounded-xl"
-              style={{ background: "var(--surface-2)" }}
-            >
-              <Settings2 className="h-5 w-5 text-[var(--color-brand-500)]" />
-            </div>
-            <div>
-              <h2 className="title-md">Notification Settings</h2>
-              <p className="paragraph mt-1">
-                Live notification state is backend-backed, while rule editing and
-                scheduler persistence are intentionally deferred.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <div
-              className="rounded-2xl border p-5"
-              style={{
-                borderColor: "var(--border)",
-                background: "var(--surface-2)",
-              }}
-            >
-              <p className="text-sm font-semibold text-[var(--title)]">
-                Finished now
-              </p>
-              <ul className="mt-3 space-y-2 text-sm text-[var(--muted)]">
-                <li>Admin can read, resolve, dismiss, and delete live notifications.</li>
-                <li>Notifications are created from real job, quota, and backend events.</li>
-                <li>Unread and critical counts come from MongoDB.</li>
-              </ul>
-            </div>
-
-            <div
-              className="rounded-2xl border p-5"
-              style={{
-                borderColor: "var(--border)",
-                background: "var(--surface-2)",
-              }}
-            >
-              <p className="text-sm font-semibold text-[var(--title)]">
-                Deferred safely
-              </p>
-              <ul className="mt-3 space-y-2 text-sm text-[var(--muted)]">
-                <li>Rule-builder persistence for thresholds and recipients.</li>
-                <li>Email, SMS, and push delivery orchestration.</li>
-                <li>Scheduled report notification automation.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <NotificationSettingsPanel
+          settings={notificationSettings}
+          updateSettings={updateNotificationSettings}
+        />
       )}
 
       <Modal open={isExportModalOpen} onClose={() => setIsExportModalOpen(false)}>

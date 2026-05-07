@@ -343,7 +343,7 @@ const MiniCard = ({
         </div>
 
         <div className="flex items-end gap-1.5">
-          <h3 className="text-xl font-bold leading-none tracking-tight text-[var(--title)] sm:text-2xl">
+          <h3 className="text-xl font-bold leading-none tracking-normal text-[var(--title)] sm:text-2xl">
             {value}
           </h3>
           {suffix ? (

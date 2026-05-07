@@ -113,7 +113,7 @@ const SecurePrivate = () => {
                       >
                         <div className="space-y-4 sm:space-y-5 lg:space-y-6">
                           <div className="max-w-full sm:max-w-[95%]">
-                            <h3 className="text-xl font-medium leading-[1.35] tracking-[-0.02em] text-[var(--title)] sm:text-2xl lg:text-[32px]">
+                            <h3 className="text-xl font-medium leading-[1.35] tracking-normal text-[var(--title)] sm:text-2xl lg:text-[32px]">
                               {item.title}
                             </h3>
                           </div>
@@ -143,7 +143,7 @@ const SecurePrivate = () => {
                           </div>
 
                           <div className="min-w-0">
-                            <p className="truncate text-base font-semibold tracking-tight text-[var(--title)] sm:text-lg lg:text-xl">
+                            <p className="truncate text-base font-semibold tracking-normal text-[var(--title)] sm:text-lg lg:text-xl">
                               EzPrint Security
                             </p>
                             <p className="truncate text-sm text-[var(--muted)] sm:text-base">

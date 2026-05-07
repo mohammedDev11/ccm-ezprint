@@ -64,7 +64,7 @@ export const LayoutTextFlip = ({
             animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
             exit={{ y: 32, opacity: 0, filter: "blur(8px)" }}
             transition={{ duration: 0.45 }}
-            className="inline-block whitespace-nowrap text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl bg-clip-text text-transparent"
+            className="inline-block whitespace-nowrap text-3xl font-bold tracking-normal sm:text-4xl lg:text-5xl bg-clip-text text-transparent"
             style={{
               backgroundImage:
                 "linear-gradient(to bottom, var(--color-brand-300), var(--color-brand-500), var(--color-brand-700))",

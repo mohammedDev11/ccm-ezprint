@@ -782,6 +782,9 @@ type FileUploadProps = {
   draftKey?: string;
   showDraftActions?: boolean;
   emptyHelperText?: string;
+  hideHeader?: boolean;
+  openOnAreaClick?: boolean;
+  hideAddFileButton?: boolean;
 };
 
 type DraftFileMeta = {
@@ -818,6 +821,9 @@ export const FileUpload = ({
   draftKey = "ezprint-upload-draft",
   showDraftActions = true,
   emptyHelperText = "PDF, DOCX, PPTX, or images. Clean, fast, and easy for users.",
+  hideHeader = false,
+  openOnAreaClick = false,
+  hideAddFileButton = false,
 }: FileUploadProps) => {
   const [internalFiles, setInternalFiles] = useState<File[]>([]);
   const [draftMeta, setDraftMeta] = useState<DraftPayload | null>(null);
@@ -897,6 +903,15 @@ export const FileUpload = ({
     fileInputRef.current?.click();
   };
 
+  const handleAreaClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!openOnAreaClick || disabled) return;
+
+    const target = event.target as HTMLElement | null;
+    if (target?.closest("button,a,input")) return;
+
+    handleClick();
+  };
+
   const saveDraft = () => {
     if (!files.length) return;
 
@@ -971,9 +986,14 @@ export const FileUpload = ({
     >
       <motion.div
         whileHover={disabled ? undefined : "animate"}
+        onClick={handleAreaClick}
         className={cn(
           "group/file card relative block w-full overflow-hidden rounded-2xl px-4 py-5 sm:px-6 sm:py-6 md:px-8",
-          disabled ? "cursor-not-allowed opacity-70" : "cursor-default",
+          disabled
+            ? "cursor-not-allowed opacity-70"
+            : openOnAreaClick
+              ? "cursor-pointer"
+              : "cursor-default",
           "transition-colors duration-200"
         )}
       >
@@ -988,7 +1008,15 @@ export const FileUpload = ({
           disabled={disabled}
         />
 
-        <div className="absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
+        <div
+          className="absolute inset-0 opacity-100"
+          style={{
+            WebkitMaskImage:
+              "radial-gradient(ellipse at center, black 0%, black 56%, rgba(0,0,0,0.54) 74%, transparent 94%)",
+            maskImage:
+              "radial-gradient(ellipse at center, black 0%, black 56%, rgba(0,0,0,0.54) 74%, transparent 94%)",
+          }}
+        >
           <GridPattern />
         </div>
 
@@ -999,80 +1027,86 @@ export const FileUpload = ({
           )}
           style={{
             background:
-              "linear-gradient(180deg, rgba(55,125,255,0.08) 0%, rgba(55,125,255,0.03) 100%)",
+              "linear-gradient(180deg, rgba(var(--brand-rgb),0.1) 0%, rgba(var(--brand-rgb),0.04) 100%)",
           }}
         />
 
         <div className="relative z-10">
           {/* Top Bar */}
-          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-            <div className="min-w-0">
-              <p className="title-md text-base sm:text-lg">{title}</p>
-              <p className="paragraph mt-2 max-w-2xl text-sm sm:text-base">
-                {description}
-              </p>
+          {(!hideHeader || files.length > 0) && (
+            <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+              {!hideHeader && (
+                <div className="min-w-0">
+                  <p className="title-md text-base sm:text-lg">{title}</p>
+                  <p className="paragraph mt-2 max-w-2xl text-sm sm:text-base">
+                    {description}
+                  </p>
 
-              {showDraftActions && draftMeta && !files.length && (
-                <div
-                  className="mt-3 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm"
-                  style={{
-                    background: "var(--surface-2)",
-                    border: "1px solid var(--border)",
-                    color: "var(--paragraph)",
-                  }}
-                >
-                  <IconDeviceFloppy size={16} />
-                  Draft found with {draftMeta.files.length} file
-                  {draftMeta.files.length > 1 ? "s" : ""}
+                  {showDraftActions && draftMeta && !files.length && (
+                    <div
+                      className="mt-3 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm"
+                      style={{
+                        background: "var(--surface-2)",
+                        border: "1px solid var(--border)",
+                        color: "var(--paragraph)",
+                      }}
+                    >
+                      <IconDeviceFloppy size={16} />
+                      Draft found with {draftMeta.files.length} file
+                      {draftMeta.files.length > 1 ? "s" : ""}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {files.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2 md:ml-auto md:justify-end">
+                  {!hideAddFileButton ? (
+                    <Button
+                      type="button"
+                      onClick={handleClick}
+                      variant="primary"
+                      size="sm"
+                      iconLeft={<IconPlus size={16} />}
+                    >
+                      Add file
+                    </Button>
+                  ) : null}
+
+                  {showDraftActions && (
+                    <Button
+                      type="button"
+                      onClick={saveDraft}
+                      disabled={!files.length}
+                      variant="secondary"
+                      size="sm"
+                      iconLeft={
+                        draftSaved ? (
+                          <IconChecks size={16} />
+                        ) : (
+                          <IconDeviceFloppy size={16} />
+                        )
+                      }
+                    >
+                      {draftSaved ? "Saved" : "Save draft"}
+                    </Button>
+                  )}
+
+                  {showClearAll && files.length > 0 && (
+                    <Button
+                      type="button"
+                      onClick={clearFiles}
+                      variant="secondary"
+                      size="sm"
+                      iconLeft={<IconX size={16} />}
+                    >
+                      Clear all
+                    </Button>
+                  )}
                 </div>
               )}
             </div>
-
-            {files.length > 0 && (
-              <div className="flex flex-wrap items-center gap-2 md:justify-end">
-                <Button
-                  type="button"
-                  onClick={handleClick}
-                  variant="primary"
-                  size="sm"
-                  iconLeft={<IconPlus size={16} />}
-                >
-                  Add files
-                </Button>
-
-                {showDraftActions && (
-                  <Button
-                    type="button"
-                    onClick={saveDraft}
-                    disabled={!files.length}
-                    variant="secondary"
-                    size="sm"
-                    iconLeft={
-                      draftSaved ? (
-                        <IconChecks size={16} />
-                      ) : (
-                        <IconDeviceFloppy size={16} />
-                      )
-                    }
-                  >
-                    {draftSaved ? "Saved" : "Save draft"}
-                  </Button>
-                )}
-
-                {showClearAll && files.length > 0 && (
-                  <Button
-                    type="button"
-                    onClick={clearFiles}
-                    variant="secondary"
-                    size="sm"
-                    iconLeft={<IconX size={16} />}
-                  >
-                    Clear all
-                  </Button>
-                )}
-              </div>
-            )}
-          </div>
+          )}
 
           {/* Draft Info */}
           {showDraftActions && draftMeta && (
@@ -1122,7 +1156,7 @@ export const FileUpload = ({
             {!files.length && (
               <>
                 <motion.div
-                  onClick={handleClick}
+                  onClick={openOnAreaClick ? undefined : handleClick}
                   layoutId="file-upload"
                   variants={mainVariant}
                   transition={{
@@ -1179,6 +1213,18 @@ export const FileUpload = ({
                   <p className="text-sm" style={{ color: "var(--paragraph)" }}>
                     {emptyHelperText}
                   </p>
+                  {!hideAddFileButton ? (
+                    <Button
+                      type="button"
+                      onClick={handleClick}
+                      variant="primary"
+                      size="sm"
+                      className="mt-4"
+                      iconLeft={<IconPlus size={16} />}
+                    >
+                      Add file
+                    </Button>
+                  ) : null}
                 </div>
               </>
             )}
@@ -1187,8 +1233,8 @@ export const FileUpload = ({
               <>
                 <div className="mb-4 text-center">
                   <p className="text-sm" style={{ color: "var(--muted)" }}>
-                    Tap a file to review it, preview it, delete it, or save your
-                    progress as a draft.
+                    Click anywhere in this area to add more files, or use the
+                    file actions to preview or delete a selection.
                   </p>
                 </div>
 
@@ -1316,33 +1362,15 @@ function buildAcceptString(accept?: Accept) {
 }
 
 export function GridPattern() {
-  const columns = 41;
-  const rows = 11;
-
   return (
     <div
-      className="flex shrink-0 scale-105 flex-wrap items-center justify-center gap-x-px gap-y-px"
-      style={{ background: "var(--surface-2)" }}
-    >
-      {Array.from({ length: rows }).map((_, row) =>
-        Array.from({ length: columns }).map((_, col) => {
-          const index = row * columns + col;
-
-          return (
-            <div
-              key={`${col}-${row}`}
-              className="h-10 w-10 shrink-0 rounded-[2px]"
-              style={{
-                background: "var(--surface)",
-                boxShadow:
-                  index % 2 === 0
-                    ? "none"
-                    : "inset 0 0 0 1px rgba(55,125,255,0.06)",
-              }}
-            />
-          );
-        })
-      )}
-    </div>
+      className="h-full w-full"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(var(--brand-rgb),0.065) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--brand-rgb),0.06) 1px, transparent 1px)",
+        backgroundPosition: "center",
+        backgroundSize: "32px 32px",
+      }}
+    />
   );
 }

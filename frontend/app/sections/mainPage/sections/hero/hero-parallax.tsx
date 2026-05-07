@@ -10,7 +10,8 @@ import {
   useTransform,
   MotionValue,
 } from "motion/react";
-import Button from "@/components/ui/button/Button";
+import { ArrowRight, LayoutDashboard } from "lucide-react";
+import { cn } from "@/lib/cn";
 
 type Product = {
   title: string;
@@ -87,10 +88,10 @@ export const HeroParallax = ({
   return (
     <section
       ref={ref}
-      className="relative min-h-screen overflow-hidden bg-[var(--color-surface)] text-[var(--color-text)]"
+      className="relative min-h-screen overflow-hidden bg-[var(--background)] text-[var(--foreground)]"
     >
       {/* content */}
-      <div className="container relative z-10 flex min-h-screen flex-col justify-start px-4 pt-28 pb-10 sm:pt-32 lg:pt-36">
+      <div className="relative z-10 flex min-h-screen w-full flex-col justify-start px-4 pt-28 pb-10 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36">
         <Header
           title={title}
           description={description}
@@ -167,7 +168,7 @@ const Header = ({
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-5xl text-4xl font-bold tracking-tight text-[var(--color-text)] sm:text-5xl lg:text-7xl"
+        className="max-w-5xl text-4xl font-bold tracking-normal text-[var(--foreground)] sm:text-5xl lg:text-7xl"
       >
         {title}
       </motion.h1>
@@ -176,7 +177,7 @@ const Header = ({
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.08 }}
-        className="mt-6 max-w-3xl text-base leading-8 text-[var(--color-text-muted)] sm:text-lg"
+        className="mt-6 max-w-3xl text-base leading-8 text-[var(--paragraph)] sm:text-lg"
       >
         {description}
       </motion.p>
@@ -188,20 +189,46 @@ const Header = ({
           transition={{ duration: 0.5, delay: 0.14 }}
           className="mt-8 flex flex-col items-center gap-3 sm:flex-row"
         >
-          {primaryAction && (
-            <Button>
-              <Link href={primaryAction.href}>{primaryAction.label}</Link>
-            </Button>
-          )}
+          {primaryAction && <HeroActionLink action={primaryAction} />}
 
           {secondaryAction && (
-            <Button variant="secondary">
-              <Link href={secondaryAction.href}>{secondaryAction.label}</Link>
-            </Button>
+            <HeroActionLink action={secondaryAction} variant="secondary" />
           )}
         </motion.div>
       )}
     </div>
+  );
+};
+
+const HeroActionLink = ({
+  action,
+  variant = "primary",
+}: {
+  action: {
+    label: string;
+    href: string;
+  };
+  variant?: "primary" | "secondary";
+}) => {
+  const isPrimary = variant === "primary";
+
+  return (
+    <Link
+      href={action.href}
+      className={cn(
+        "group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/30 sm:px-6 sm:text-base",
+        isPrimary
+          ? "bg-[linear-gradient(135deg,var(--color-brand-400),var(--color-brand-600))] text-white shadow-[0_16px_36px_rgba(var(--brand-rgb),0.3)] hover:-translate-y-0.5 hover:shadow-[0_20px_44px_rgba(var(--brand-rgb),0.36)] active:translate-y-0"
+          : "border border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] text-[var(--foreground)] shadow-surface hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--color-brand-500)_34%,var(--border))] hover:bg-[color-mix(in_srgb,var(--color-brand-500)_9%,var(--surface))] active:translate-y-0"
+      )}
+    >
+      <span>{action.label}</span>
+      {isPrimary ? (
+        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+      ) : (
+        <LayoutDashboard className="h-4 w-4" />
+      )}
+    </Link>
   );
 };
 

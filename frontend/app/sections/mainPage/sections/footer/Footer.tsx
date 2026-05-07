@@ -110,7 +110,7 @@ const Footer = () => {
                   <BrandMark className="h-12 w-12" />
 
                   <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-[var(--title)] sm:text-4xl">
+                    <h2 className="text-3xl font-bold tracking-normal text-[var(--title)] sm:text-4xl">
                       {brand.name}
                     </h2>
                     <p className="mt-1 text-sm text-[var(--muted)] sm:text-base">

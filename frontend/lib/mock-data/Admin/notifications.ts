@@ -43,6 +43,7 @@ export type NotificationSettingsType = {
   enabled: boolean;
   email_enabled: boolean;
   email_recipients: string;
+  critical_alerts_only: boolean;
   alert_printer_offline: boolean;
   alert_toner_low: boolean;
   toner_threshold: number;
@@ -184,6 +185,7 @@ export const INITIAL_NOTIFICATION_SETTINGS: NotificationSettingsType = {
   enabled: true,
   email_enabled: false,
   email_recipients: "",
+  critical_alerts_only: false,
   alert_printer_offline: true,
   alert_toner_low: true,
   toner_threshold: 20,

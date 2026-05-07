@@ -515,7 +515,7 @@ export const NavbarLogo = () => {
           color: "var(--foreground)",
           fontFamily: '"Sora", var(--font-sans), ui-sans-serif, sans-serif',
           fontWeight: 800,
-          letterSpacing: "-0.015em",
+          letterSpacing: "0",
         }}
       >
         <span
@@ -531,7 +531,7 @@ export const NavbarLogo = () => {
           style={{
             color: "var(--foreground)",
             fontWeight: 800,
-            letterSpacing: "-0.02em",
+            letterSpacing: "0",
           }}
         >
           Print
@@ -559,15 +559,17 @@ export const NavbarButton = ({
   | React.ComponentPropsWithoutRef<"button">
 )) => {
   const baseStyles =
-    "px-4 py-2 rounded-md text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
+    "relative inline-flex min-h-11 items-center justify-center rounded-full px-4 py-2 text-center text-sm font-semibold transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/30";
 
   const variantStyles = {
     primary:
-      "bg-[var(--foreground)] text-[var(--background)] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.08)_inset]",
-    secondary: "bg-transparent shadow-none text-[var(--foreground)]",
-    dark: "bg-[var(--foreground)] text-[var(--background)] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.08)_inset]",
+      "bg-[linear-gradient(135deg,var(--color-brand-400),var(--color-brand-600))] text-white shadow-[0_16px_34px_rgba(var(--brand-rgb),0.28)] hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(var(--brand-rgb),0.34)] active:translate-y-0",
+    secondary:
+      "border border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] text-[var(--foreground)] shadow-surface hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--color-brand-500)_34%,var(--border))] hover:bg-[color-mix(in_srgb,var(--color-brand-500)_9%,var(--surface))] active:translate-y-0",
+    dark:
+      "bg-[var(--foreground)] text-[var(--background)] shadow-surface hover:-translate-y-0.5 active:translate-y-0",
     gradient:
-      "bg-gradient-to-b from-brand-400 to-brand-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.22)_inset]",
+      "bg-[linear-gradient(135deg,var(--color-brand-400),var(--color-brand-600))] text-white shadow-[0_16px_34px_rgba(var(--brand-rgb),0.28)] hover:-translate-y-0.5 active:translate-y-0",
   };
 
   return (

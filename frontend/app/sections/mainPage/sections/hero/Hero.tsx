@@ -194,12 +194,12 @@ const Hero = () => {
       }
       description="Manage your print jobs, upload files easily, and print with a modern experience designed to be simple, secure, and efficient."
       primaryAction={{
-        label: "Go to User",
+        label: "Start Printing",
         href: "/sections/user/print",
       }}
       secondaryAction={{
-        label: "Go to Admin",
-        href: "/sections/admin/dashboard",
+        label: "View Dashboard",
+        href: "/sections/user/dashboard",
       }}
     />
   );

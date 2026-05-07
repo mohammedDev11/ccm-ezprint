@@ -1,11 +1,9 @@
 import { MainNavbar } from "./sections/mainPage/components/MainNavbar";
-import SSO from "./sections/mainPage/sections/SSO";
 
 const page = () => {
   return (
-    <main>
+    <main className="w-full overflow-x-clip">
       <MainNavbar />
-      <SSO />
     </main>
   );
 };

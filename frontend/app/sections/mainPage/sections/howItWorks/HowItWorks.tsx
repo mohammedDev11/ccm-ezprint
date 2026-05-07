@@ -131,17 +131,19 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div id="how-it-works" className="section relative w-full overflow-hidden">
-      <SectionHeader
-        title="How EzPrint Works"
-        description="A simple conversation-based flow that shows how users upload, secure, release, and track their print jobs."
-        align="center"
-      />
+    <section id="how-it-works" className="section relative w-full overflow-hidden">
+      <div className="container">
+        <SectionHeader
+          title="How EzPrint Works"
+          description="A simple conversation-based flow that shows how users upload, secure, release, and track their print jobs."
+          align="center"
+        />
+      </div>
 
       <div>
         <ProgressSteps data={data} />
       </div>
-    </div>
+    </section>
   );
 };
 

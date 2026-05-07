@@ -9,6 +9,8 @@ type IconLabelButtonProps = {
   onClick?: () => void;
   className?: string;
   labelClassName?: string;
+  showLabel?: boolean;
+  iconOnly?: boolean;
 };
 
 export default function IconLabelButton({
@@ -17,38 +19,40 @@ export default function IconLabelButton({
   onClick,
   className,
   labelClassName,
+  showLabel = false,
+  iconOnly = false,
 }: IconLabelButtonProps) {
   return (
     <button
       type="button"
       onClick={onClick}
+      aria-label={label}
       className={cn(
-        "group inline-flex items-center rounded-[1rem] border px-2.5 py-2 text-sm font-medium transition-all duration-300 cursor-pointer",
+        "group inline-flex h-11 items-center justify-center rounded-full border border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_90%,transparent)] px-2.5 text-sm font-semibold text-[var(--foreground)] shadow-surface transition-all duration-200 cursor-pointer",
+        "hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--color-brand-500)_34%,var(--border))] hover:bg-[color-mix(in_srgb,var(--color-brand-500)_9%,var(--surface))]",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/30 active:translate-y-0",
+        showLabel && "gap-2 px-3.5",
+        iconOnly && "w-11 px-0",
         className
       )}
-      style={{
-        borderColor: "var(--border)",
-        background:
-          "linear-gradient(180deg, color-mix(in srgb, var(--surface) 94%, transparent), color-mix(in srgb, var(--surface-2) 96%, transparent))",
-        color: "var(--foreground)",
-        boxShadow:
-          "0 10px 24px rgba(var(--shadow-color), 0.08), inset 0 1px 0 rgba(255,255,255,0.08)",
-      }}
     >
-      <span className="flex h-8 w-8 items-center justify-center shrink-0">
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--color-brand-500)_10%,var(--surface-2))] text-[var(--color-brand-500)] transition-colors duration-200 group-hover:bg-[color-mix(in_srgb,var(--color-brand-500)_16%,var(--surface-2))]">
         {icon}
       </span>
 
-      <span
-        className={cn(
-          "ml-0 max-w-0 overflow-hidden whitespace-nowrap opacity-0",
-          "transition-all duration-700",
-          "group-hover:ml-0.5 group-hover:max-w-[120px] group-hover:opacity-100",
-          labelClassName
-        )}
-      >
-        {label}
-      </span>
+      {!iconOnly && (
+        <span
+          className={cn(
+            "overflow-hidden whitespace-nowrap transition-all duration-300",
+            showLabel
+              ? "max-w-[140px] opacity-100"
+              : "ml-0 max-w-0 opacity-0 group-hover:ml-2 group-hover:max-w-[120px] group-hover:opacity-100",
+            labelClassName
+          )}
+        >
+          {label}
+        </span>
+      )}
     </button>
   );
 }

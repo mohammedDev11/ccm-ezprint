@@ -528,17 +528,17 @@ body.fullscreen-table-mode .fixed.inset-x-0.top-0 {
 /* =========== TYPOGRAPHY ============ */
 .title-xl {
   color: var(--title);
-  @apply text-4xl font-semibold tracking-[-0.03em] sm:text-5xl lg:text-6xl;
+  @apply text-4xl font-semibold tracking-normal sm:text-5xl lg:text-6xl;
 }
 
 .title-lg {
   color: var(--title);
-  @apply text-3xl font-semibold tracking-[-0.025em] sm:text-4xl;
+  @apply text-3xl font-semibold tracking-normal sm:text-4xl;
 }
 
 .title-md {
   color: var(--title);
-  @apply text-2xl font-semibold tracking-[-0.02em] sm:text-3xl;
+  @apply text-2xl font-semibold tracking-normal sm:text-3xl;
 }
 
 .paragraph-lg {

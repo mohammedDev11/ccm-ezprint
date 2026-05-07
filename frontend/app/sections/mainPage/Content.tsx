@@ -33,7 +33,7 @@ const Content = () => {
   };
 
   return (
-    <div className="container relative">
+    <div className="relative w-full overflow-x-clip">
       <Hero />
       <Features />
       <HowItWorks />
@@ -45,7 +45,7 @@ const Content = () => {
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
-        className={`fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-md border border-white/10 bg-white/10 text-white shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-white/15 ${
+        className={`fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] text-[var(--foreground)] shadow-surface backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[color-mix(in_srgb,var(--color-brand-500)_34%,var(--border))] hover:bg-[color-mix(in_srgb,var(--color-brand-500)_10%,var(--surface))] hover:text-[var(--color-brand-500)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/30 ${
           showScrollTop
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none translate-y-4 opacity-0"

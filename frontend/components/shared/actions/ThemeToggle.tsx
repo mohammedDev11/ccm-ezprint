@@ -31,7 +31,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { FiMoon, FiSun } from "react-icons/fi";
+import { Moon, Sun } from "lucide-react";
 import IconLabelButton from "../../ui/button/IconLabelButton";
 import useIsClient from "@/lib/useIsClient";
 import {
@@ -65,7 +65,15 @@ const persistCurrentSessionThemeMode = async (themeMode: "light" | "dark") => {
   }
 };
 
-export default function ThemeToggle({ className }: { className?: string }) {
+export default function ThemeToggle({
+  className,
+  showLabel = false,
+  iconOnly = false,
+}: {
+  className?: string;
+  showLabel?: boolean;
+  iconOnly?: boolean;
+}) {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const mounted = useIsClient();
 
@@ -83,10 +91,12 @@ export default function ThemeToggle({ className }: { className?: string }) {
 
   return (
     <IconLabelButton
-      icon={isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
+      icon={isDark ? <Sun size={18} /> : <Moon size={18} />}
       label={isDark ? "Light" : "Dark"}
       onClick={handleToggle}
       className={className}
+      showLabel={showLabel}
+      iconOnly={iconOnly}
     />
   );
 }
