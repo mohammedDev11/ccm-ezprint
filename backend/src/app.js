@@ -6,11 +6,26 @@ const env = require("./config/env");
 const apiRoutes = require("./routes");
 
 const app = express();
+const allowedOrigins = (
+  process.env.CLIENT_ORIGIN || "http://localhost:3000,http://localhost:5173"
+)
+  .split(",")
+  .map((origin) => origin.trim());
+
+console.log("Allowed CORS origins:", allowedOrigins);
 
 app.use(helmet());
 app.use(
   cors({
-    origin: env.clientOrigin,
+    origin(origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials: true,
   })
 );
