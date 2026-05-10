@@ -43,7 +43,20 @@ type UploadBatchOptions = {
   metadata?: Record<string, string | number | undefined | null>;
 };
 
+type ViteImportMeta = ImportMeta & {
+  env?: {
+    VITE_API_URL?: string;
+  };
+};
+
+const viteApiUrl =
+  typeof import.meta !== "undefined"
+    ? (import.meta as ViteImportMeta).env?.VITE_API_URL
+    : undefined;
+
 const API_BASE_URL =
+  viteApiUrl ||
+  process.env.VITE_API_URL ||
   process.env.NEXT_PUBLIC_API_BASE_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
   "http://localhost:5001";
